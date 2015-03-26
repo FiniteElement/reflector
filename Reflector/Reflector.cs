@@ -69,10 +69,26 @@ namespace Reflector
 			return CreateReflector (root.ToString (), root);
 		}
 
+		public static IReflector CreateRootReflector<T> (T value) where T : new()
+		{
+			var root = new RootWrapper<T> (value);
+			return CreateReflector (root.ToString (), root);
+		}
+
 		public static IReflector CreateRootReflector (object value)
 		{
 			var root = new RootWrapper<object> (value);
 			return CreateReflector (root.ToString (), root);
+		}
+
+		public static IReflector CreateReflector<T> (string key) where T : new()
+		{
+			return CreateReflector(key, new T () );
+		}
+
+		public static IReflector CreateReflector<T> (string key, T value) where T : new()
+		{
+			return CreateReflector (key, value as object);
 		}
 
 		public static IReflector CreateReflector (string key, object value)
@@ -107,8 +123,6 @@ namespace Reflector
 
 		private class RootWrapper<T> where T : new()
 		{
-			// ReSharper disable once UnusedAutoPropertyAccessor.Local
-			// ReSharper disable once MemberCanBePrivate.Local
 			public T Root { private get; set; }
 
 			public RootWrapper ()
