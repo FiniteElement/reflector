@@ -29,12 +29,7 @@ namespace Reflector
 		{
 			var root1 = Reflector.CreateRootReflector<Test> ();
 			Console.WriteLine ("Key of root1: {0}", root1.Key);
-			//root1.AutoMap = true;
-			//root1.Map("Leaf");
 			root1 ["Leaf"].Value = "Banán";
-			//root1.Map("Method");
-			//root1.Map("MethodWithParam");
-			//root1.Map("Member");
 			Console.WriteLine (root1 ["Member"].Info);
 			Console.WriteLine (root1 ["Member"].Value);
 			Console.WriteLine (root1 ["Method"].Info);
@@ -46,12 +41,15 @@ namespace Reflector
 			var obj = new Test ();
 			obj.Leaf = "Körte";
 			var root2 = Reflector.CreateRootReflector (obj);
+			root2.AutoMap = false;
 			root2.Map ("Leaf");
 			Console.WriteLine ((root2.Value as Test).Leaf);
 
 			var Property = Reflector.CreateReflector ("Property", obj);
+			Property.AutoMap = false;
 			Console.WriteLine ("Key of Property: {0}", Property.Key);
 			var Leaf = Reflector.CreateReflector ("Leaf", obj);
+			Leaf.AutoMap = false;
 			Leaf.Value = "Cica";
 			Property.Default ();
 			Property.Map ("Property");
