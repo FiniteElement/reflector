@@ -71,14 +71,15 @@ namespace Reflector
 
 		public static IReflector CreateRootReflector<T> (T value) where T : new()
 		{
+			if (value == null)
+				return null;
 			var root = new RootWrapper<T> (value);
 			return CreateReflector (root.ToString (), root);
 		}
 
 		public static IReflector CreateRootReflector (object value)
 		{
-			var root = new RootWrapper<object> (value);
-			return CreateReflector (root.ToString (), root);
+			return CreateRootReflector<object> (value);
 		}
 
 		public static IReflector CreateReflector<T> (string key) where T : new()
