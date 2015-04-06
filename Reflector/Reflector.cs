@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Reflection;
-using Microsoft.CSharp;
+using System.Linq.Expressions;
 
 namespace Reflector
 {
@@ -138,7 +137,7 @@ namespace Reflector
 
 			public override String ToString ()
 			{
-				return "Root";
+				return ((MemberExpression)((Expression<Func<T>>)(() => this.Root)).Body).Member.Name;
 			}
 		}
 	}
