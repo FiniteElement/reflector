@@ -41,6 +41,13 @@ namespace ReflectorTest
 			var root = Reflector.Reflector.CreateRootReflector (null);
 			Assert.IsNull (root);
 		}
+
+		[Test]
+		public void TestRootKey()
+		{
+			var root = Reflector.Reflector.CreateRootReflector<Test> ();
+			Assert.AreEqual ("Root",root.Key);
+		}
 	}
 }
 
